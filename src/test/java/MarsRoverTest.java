@@ -7,8 +7,12 @@ import rover.Rover;
 public class MarsRoverTest {
 
     @Test
-    public void move_forward_test() {
+    public void first_forward_north_move() {
         a_rover().located_at(0,0).facing("N").moveForward().should_be_located_at(0,1);
+    }
+
+    @Test
+    public void second_forward_north_move() {
         a_rover().located_at(0,1).facing("N").moveForward().should_be_located_at(0,2);
     }
 

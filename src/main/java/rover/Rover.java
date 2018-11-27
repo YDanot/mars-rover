@@ -20,6 +20,6 @@ public class Rover {
     }
 
     public Rover moveForward() {
-        return new Rover(new Position(0, 1), facingDirection);
+        return new Rover(new Position(position.x(), position.y() + 1), facingDirection);
     }
 }
