@@ -81,7 +81,17 @@ public class Rover {
     }
 
     private Position translationOf(int x, int y) {
-        return new Position(position().x() + x, position().y() + y);
+        final int maybeX = acceptX(position().x() + x);
+        final int maybeY = acceptY(position().y() + y);
+        return new Position(maybeX, maybeY);
+    }
+
+    private int acceptX(int x) {
+        return x;
+    }
+
+    private int acceptY(int y) {
+        return y;
     }
 
     @Override
