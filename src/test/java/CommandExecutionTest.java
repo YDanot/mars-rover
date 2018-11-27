@@ -7,14 +7,17 @@ public class CommandExecutionTest {
 
     @Test
     public void command_f() {
-        final Rover rover = a_rover().located_at(0, 0).facing("N").get();
-        final Rover f = new Execute().execute(rover, "f");
-        Assertions.assertThat(f.position()).isEqualTo(rover.moveForward().position());
+        Assertions.assertThat(
+                a_rover().located_at(0, 0).facing("N").execute("f").position())
+                .isEqualTo(
+                        a_rover().located_at(0, 0).facing("N").moveForward().get().position()
+                );
     }
 
     @Test
     public void command_ff() {
-        Assertions.assertThat(a_rover().located_at(0, 0).facing("N").execute("ff").position())
+        Assertions.assertThat(
+                        a_rover().located_at(0, 0).facing("N").execute("ff").position())
                 .isEqualTo(
                         a_rover().located_at(0, 0).facing("N").moveForward().moveForward().get().position()
                 );
