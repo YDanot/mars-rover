@@ -11,6 +11,9 @@ public class Execute {
         if (commands.equals("ff")){
             return rover.moveForward().moveForward();
         }
+        if (commands.equals("b")){
+            return rover.moveBackward();
+        }
         return rover.moveForward();
     }
 }
