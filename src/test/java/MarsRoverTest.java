@@ -26,6 +26,11 @@ public class MarsRoverTest {
         a_rover().located_at(0, 0).facing("E").moveForward().should_be_located_at(1, 0);
     }
 
+    @Test
+    public void first_forward_west_move() {
+        a_rover().located_at(0, 0).facing("W").moveForward().should_be_located_at(-1, 0);
+    }
+
     private GlueRover a_rover() {
         return new GlueRover();
     }
@@ -54,6 +59,9 @@ public class MarsRoverTest {
         }
 
         private Direction toDirection(String direction) {
+            if (direction.equals("W")) {
+                return Direction.WEST;
+            }
             if (direction.equals("E")) {
                 return Direction.EAST;
             }

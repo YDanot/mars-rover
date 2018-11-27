@@ -19,10 +19,13 @@ public class Rover {
     }
 
     public Rover moveForward() {
-        if (facingDirection().equals(Direction.EAST)){
-            return new Rover(new Position(position().x()+1, position().y()), facingDirection());
+        if (facingDirection().equals(Direction.WEST)) {
+            return new Rover(new Position(position().x() - 1, position().y()), facingDirection());
         }
-        if (facingDirection().equals(Direction.SOUTH)){
+        if (facingDirection().equals(Direction.EAST)) {
+            return new Rover(new Position(position().x() + 1, position().y()), facingDirection());
+        }
+        if (facingDirection().equals(Direction.SOUTH)) {
             return new Rover(new Position(position().x(), position().y() - 1), facingDirection());
         }
         return new Rover(new Position(position().x(), position().y() + 1), facingDirection());
