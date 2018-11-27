@@ -9,28 +9,25 @@ import java.util.Objects;
 public class GlueRover {
 
     private final Rover rover;
-    private final Environment environment;
 
     public GlueRover() {
-        this.rover = new Rover(new Position(1, 1), Direction.NORTH);
-        this.environment = new Environment(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        this.rover = new Rover(new Position(1, 1), Direction.NORTH, new Environment(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
-    private GlueRover(Rover rover, Environment environment) {
+    private GlueRover(Rover rover) {
         this.rover = rover;
-        this.environment = environment;
     }
 
     public GlueRover located_at(int x, int y) {
-        return new GlueRover(new Rover(new Position(x, y), rover.facingDirection()), environment);
+        return new GlueRover(new Rover(new Position(x, y), rover.facingDirection(), rover.environment()));
     }
 
     public GlueRover facing(String direction) {
-        return new GlueRover(new Rover(rover.position(), toDirection(direction)), environment);
+        return new GlueRover(new Rover(rover.position(), toDirection(direction), rover.environment()));
     }
 
     public GlueRover forward() {
-        return new GlueRover(rover.moveForward(), environment);
+        return new GlueRover(rover.moveForward());
     }
 
     private Direction toDirection(String direction) {
@@ -53,10 +50,10 @@ public class GlueRover {
     }
 
     public GlueRover backward() {
-        if (environment.height() == 3){
-            return new GlueRover(rover.moveForward().moveForward().moveForward(), environment);
+        if (rover.environment().height() == 3) {
+            return new GlueRover(rover.moveForward().moveForward().moveForward());
         }
-        return new GlueRover(rover.moveBackward(), environment);
+        return new GlueRover(rover.moveBackward());
     }
 
     public GlueRover and() {
@@ -69,11 +66,11 @@ public class GlueRover {
     }
 
     public GlueRover left() {
-        return new GlueRover(rover.turnLeft(), environment);
+        return new GlueRover(rover.turnLeft());
     }
 
     public GlueRover right() {
-        return new GlueRover(rover.turnRight(), environment);
+        return new GlueRover(rover.turnRight());
     }
 
     public Rover get() {
@@ -81,7 +78,7 @@ public class GlueRover {
     }
 
     public GlueRover execute(String commands) {
-        return new GlueRover(new Execute().execute(rover, commands), environment);
+        return new GlueRover(new Execute().execute(rover, commands));
     }
 
     @Override
@@ -98,6 +95,6 @@ public class GlueRover {
     }
 
     public GlueRover on_an_environment_of(int width, int height) {
-        return new GlueRover(rover, new Environment(width, height));
+        return new GlueRover(new Rover(rover.position(), rover.facingDirection(), new Environment(width, height)));
     }
 }
