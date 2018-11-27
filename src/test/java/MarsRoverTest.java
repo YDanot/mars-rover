@@ -36,6 +36,11 @@ public class MarsRoverTest {
         a_rover().located_at(0, -1).facing("N").moveBackward().should_be_located_at(0, -2);
     }
 
+    @Test
+    public void facing_south_move_backward() {
+        a_rover().located_at(0, 0).facing("S").moveBackward().should_be_located_at(0, 1);
+    }
+
     private GlueRover a_rover() {
         return new GlueRover();
     }
