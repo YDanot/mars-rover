@@ -80,7 +80,10 @@ public class GlueRover {
 
     @Override
     public boolean equals(Object o) {
-        return Objects.equals(rover, ((GlueRover)o).rover);
+        if (this == o) return true;
+        if (!(o instanceof GlueRover)) return false;
+        GlueRover glueRover = (GlueRover) o;
+        return Objects.equals(rover, glueRover.rover);
     }
 
     @Override
