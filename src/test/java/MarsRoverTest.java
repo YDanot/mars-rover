@@ -1,8 +1,4 @@
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import rover.Direction;
-import rover.Position;
-import rover.Rover;
 
 public class MarsRoverTest {
 
@@ -95,73 +91,4 @@ public class MarsRoverTest {
         return new GlueRover();
     }
 
-    private class GlueRover {
-
-        private Position position;
-        private String direction;
-
-        private Rover rover;
-
-        public GlueRover located_at(int x, int y) {
-            this.position = new Position(x, y);
-            return this;
-        }
-
-        public GlueRover facing(String direction) {
-            this.direction = direction;
-            return this;
-        }
-
-        public GlueRover moveForward() {
-            final Rover rover = new Rover(position, toDirection(direction));
-            this.rover = rover.moveForward();
-            return this;
-        }
-
-        private Direction toDirection(String direction) {
-            if (direction.equals("W")) {
-                return Direction.WEST;
-            }
-            if (direction.equals("E")) {
-                return Direction.EAST;
-            }
-            if (direction.equals("S")) {
-                return Direction.SOUTH;
-            }
-
-            return Direction.NORTH;
-        }
-
-        public GlueRover should_be_located_at(int x, int y) {
-            Assertions.assertThat(rover.position()).isEqualTo(new Position(x, y));
-            return this;
-        }
-
-        public GlueRover moveBackward() {
-            final Rover rover = new Rover(position, toDirection(direction));
-            this.rover = rover.moveBackward();
-            return this;
-        }
-
-        public GlueRover and() {
-            return this;
-        }
-
-        public GlueRover should_face(String direction) {
-            Assertions.assertThat(rover.facingDirection()).isEqualTo(toDirection(direction));
-            return this;
-        }
-
-        public GlueRover turnLeft() {
-            final Rover rover = new Rover(position, toDirection(direction));
-            this.rover = rover.turnLeft();
-            return this;
-        }
-
-        public GlueRover turnRight() {
-            final Rover rover = new Rover(position, toDirection(direction));
-            this.rover = rover.turnRight();
-            return this;
-        }
-    }
 }
