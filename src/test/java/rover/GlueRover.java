@@ -1,8 +1,7 @@
+package rover;
+
 import command.Execute;
 import org.assertj.core.api.Assertions;
-import rover.Direction;
-import rover.Position;
-import rover.Rover;
 
 import java.util.Objects;
 

@@ -1,3 +1,5 @@
+package rover;
+
 import org.junit.Test;
 
 public class MarsRoverTest {
