@@ -20,10 +20,6 @@ public class Position {
         return y;
     }
 
-    public Position translationOf(int x, int y) {
-        return new Position(x() + x, y() + y);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -81,7 +81,7 @@ public class Rover {
     }
 
     private Position translationOf(int x, int y) {
-        return position().translationOf(x, y);
+        return new Position(position().x() + x, position().y() + y);
     }
 
     @Override
