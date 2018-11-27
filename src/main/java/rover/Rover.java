@@ -28,7 +28,7 @@ public class Rover {
         if (facingDirection().equals(Direction.SOUTH)) {
             return new Rover(new Position(position().x(), position().y() - 1), facingDirection());
         }
-        return new Rover(new Position(position().x(), position().y() + 1), facingDirection());
+        return new Rover(position().translationOf(0,1), facingDirection());
     }
 
     public Rover moveBackward() {

@@ -8,7 +8,6 @@ public class Position {
     private final int y;
 
     public Position(int x, int y) {
-
         this.x = x;
         this.y = y;
     }
@@ -19,6 +18,10 @@ public class Position {
 
     public int y() {
         return y;
+    }
+
+    public Position translationOf(int x, int y) {
+        return new Position(x() + x, y() + y);
     }
 
     @Override
