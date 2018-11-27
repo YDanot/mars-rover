@@ -48,7 +48,7 @@ public class MarsRoverTest {
 
     @Test
     public void facing_west_move_backward() {
-        a_rover().located_at(0, 0).facing("W").moveBackward().should_be_located_at(1, 0).and_should_face("W");
+        a_rover().located_at(0, 0).facing("W").moveBackward().should_be_located_at(1, 0).and().should_face("W");
     }
 
     private GlueRover a_rover() {
@@ -103,7 +103,11 @@ public class MarsRoverTest {
             return this;
         }
 
-        public GlueRover and_should_face(String direction) {
+        public GlueRover and() {
+            return this;
+        }
+
+        public GlueRover should_face(String direction) {
             Assertions.assertThat(rover.facingDirection()).isEqualTo(toDirection(direction));
             return this;
         }
