@@ -5,55 +5,57 @@ public class CommandExecutionTest {
 
     @Test
     public void command_f() {
+
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("f"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").forward().get()
+                        a_rover().execute("f"))
+                .isEqualTo(
+                        a_rover().forward()
                 );
     }
 
     @Test
     public void command_ff() {
+
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("ff"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").forward().forward().get()
+                        a_rover().execute("ff"))
+                .isEqualTo(
+                        a_rover().forward().forward()
                 );
     }
 
     @Test
     public void command_b() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("b"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").backward().get()
+                a_rover().execute("b"))
+                .isEqualTo(
+                        a_rover().backward()
                 );
     }
 
     @Test
     public void command_l() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("l"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").left().get()
+                a_rover().execute("l"))
+                .isEqualTo(
+                        a_rover().left()
                 );
     }
 
     @Test
     public void command_r() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("r"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").right().get()
+                a_rover().execute("r"))
+                .isEqualTo(
+                        a_rover().right()
                 );
     }
 
     @Test
     public void command_frbl() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("frbl"))
-                .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").forward().right().backward().left().get()
+                a_rover().execute("frbl"))
+                .isEqualTo(
+                        a_rover().forward().right().backward().left()
                 );
     }
 

@@ -4,12 +4,14 @@ import rover.Direction;
 import rover.Position;
 import rover.Rover;
 
+import java.util.Objects;
+
 public class GlueRover {
 
     private final Rover rover;
 
     public GlueRover() {
-        this.rover = new Rover(new Position(0,0), Direction.NORTH);;
+        this.rover = new Rover(new Position(0, 0), Direction.NORTH);
     }
 
     private GlueRover(Rover rover) {
@@ -72,7 +74,17 @@ public class GlueRover {
         return rover;
     }
 
-    public Rover execute(String commands) {
-        return new Execute().execute(rover, commands);
+    public GlueRover execute(String commands) {
+        return new GlueRover(new Execute().execute(rover, commands));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return Objects.equals(rover, ((GlueRover)o).rover);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rover);
     }
 }
