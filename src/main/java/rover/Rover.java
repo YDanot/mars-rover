@@ -30,28 +30,28 @@ public class Rover {
 
     public Rover moveForward() {
         if (facingDirection().equals(Direction.WEST)) {
-            return new Rover(position().translationOf(-1, 0), facingDirection(), environment);
+            return new Rover(translationOf(-1, 0), facingDirection(), environment);
         }
         if (facingDirection().equals(Direction.EAST)) {
-            return new Rover(position().translationOf(1, 0), facingDirection(), environment);
+            return new Rover(translationOf(1, 0), facingDirection(), environment);
         }
         if (facingDirection().equals(Direction.SOUTH)) {
-            return new Rover(position().translationOf(0, -1), facingDirection(), environment);
+            return new Rover(translationOf(0, -1), facingDirection(), environment);
         }
-        return new Rover(position().translationOf(0, 1), facingDirection(), environment);
+        return new Rover(translationOf(0, 1), facingDirection(), environment);
     }
 
     public Rover moveBackward() {
         if (facingDirection().equals(Direction.WEST)) {
-            return new Rover(position().translationOf(1, 0), facingDirection(), environment);
+            return new Rover(translationOf(1, 0), facingDirection(), environment);
         }
         if (facingDirection().equals(Direction.EAST)) {
-            return new Rover(position().translationOf(-1, 0), facingDirection(), environment);
+            return new Rover(translationOf(-1, 0), facingDirection(), environment);
         }
         if (facingDirection().equals(Direction.SOUTH)) {
-            return new Rover(position().translationOf(0, 1), facingDirection(), environment);
+            return new Rover(translationOf(0, 1), facingDirection(), environment);
         }
-        return new Rover(position().translationOf(0, -1), facingDirection(), environment);
+        return new Rover(translationOf(0, -1), facingDirection(), environment);
     }
 
     public Rover turnLeft() {
@@ -78,6 +78,10 @@ public class Rover {
             return new Rover(position(), Direction.NORTH, environment);
         }
         return new Rover(position(), Direction.EAST, environment);
+    }
+
+    private Position translationOf(int x, int y) {
+        return position().translationOf(x, y);
     }
 
     @Override
