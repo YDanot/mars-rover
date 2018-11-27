@@ -50,9 +50,6 @@ public class GlueRover {
     }
 
     public GlueRover backward() {
-        if (rover.environment().height() == 3) {
-            return new GlueRover(rover.moveForward().moveForward().moveForward());
-        }
         return new GlueRover(rover.moveBackward());
     }
 
