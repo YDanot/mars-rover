@@ -9,7 +9,9 @@ public class MarsRoverTest {
     @Test
     public void move_forward_test() {
         a_rover().located_at(0,0).facing("N").moveForward().should_be_located_at(0,1);
+        a_rover().located_at(0,1).facing("N").moveForward().should_be_located_at(0,2);
     }
+
 
     private GlueRover a_rover() {
         return new GlueRover();
