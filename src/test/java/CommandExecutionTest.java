@@ -16,7 +16,7 @@ public class CommandExecutionTest {
     public void command_ff() {
         Assertions.assertThat(
                 a_rover().located_at(0, 0).facing("N").execute("ff").position())
-                .isEqualTo(
+                .isEqualToComparingFieldByField(
                         a_rover().located_at(0, 0).facing("N").moveForward().moveForward().get().position()
                 );
     }
@@ -25,7 +25,7 @@ public class CommandExecutionTest {
     public void command_b() {
         Assertions.assertThat(
                 a_rover().located_at(0, 0).facing("N").execute("b").position())
-                .isEqualTo(
+                .isEqualToComparingFieldByField(
                         a_rover().located_at(0, 0).facing("N").moveBackward().get().position()
                 );
     }
@@ -33,18 +33,18 @@ public class CommandExecutionTest {
     @Test
     public void command_l() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("l").position())
-                .isEqualTo(
-                        a_rover().located_at(0, 0).facing("N").turnLeft().get().position()
+                a_rover().located_at(0, 0).facing("N").execute("l").facingDirection())
+                .isEqualToComparingFieldByField(
+                        a_rover().located_at(0, 0).facing("N").turnLeft().get().facingDirection()
                 );
     }
 
     @Test
     public void command_r() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("r").position())
-                .isEqualTo(
-                        a_rover().located_at(0, 0).facing("N").turnRight().get().position()
+                a_rover().located_at(0, 0).facing("N").execute("r").facingDirection())
+                .isEqualToComparingFieldByField(
+                        a_rover().located_at(0, 0).facing("N").turnRight().get().facingDirection()
                 );
     }
 
