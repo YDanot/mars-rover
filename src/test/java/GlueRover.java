@@ -6,21 +6,26 @@ import rover.Rover;
 
 public class GlueRover {
 
-    private Rover rover = new Rover(new Position(0,0), Direction.NORTH);
+    private final Rover rover;
+
+    public GlueRover() {
+        this.rover = new Rover(new Position(0,0), Direction.NORTH);;
+    }
+
+    private GlueRover(Rover rover) {
+        this.rover = rover;
+    }
 
     public GlueRover located_at(int x, int y) {
-        this.rover = new Rover(new Position(x, y), rover.facingDirection());
-        return this;
+        return new GlueRover(new Rover(new Position(x, y), rover.facingDirection()));
     }
 
     public GlueRover facing(String direction) {
-        this.rover = new Rover(rover.position(), toDirection(direction));
-        return this;
+        return new GlueRover(new Rover(rover.position(), toDirection(direction)));
     }
 
     public GlueRover forward() {
-        this.rover = rover.moveForward();
-        return this;
+        return new GlueRover(rover.moveForward());
     }
 
     private Direction toDirection(String direction) {
@@ -43,8 +48,7 @@ public class GlueRover {
     }
 
     public GlueRover backward() {
-        this.rover = rover.moveBackward();
-        return this;
+        return new GlueRover(rover.moveBackward());
     }
 
     public GlueRover and() {
@@ -57,13 +61,11 @@ public class GlueRover {
     }
 
     public GlueRover left() {
-        this.rover = rover.turnLeft();
-        return this;
+        return new GlueRover(rover.turnLeft());
     }
 
     public GlueRover right() {
-        this.rover = rover.turnRight();
-        return this;
+        return new GlueRover(rover.turnRight());
     }
 
     public Rover get() {
