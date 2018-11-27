@@ -8,6 +8,11 @@ public class Execute {
         if (commands.equals("ff")){
             return rover.moveForward().moveForward();
         }
+
+        if (commands.equals("f")){
+            return rover.moveForward();
+        }
+
         if (commands.equals("b")){
             return rover.moveBackward();
         }
@@ -18,6 +23,6 @@ public class Execute {
         if (commands.equals("r")){
             return rover.turnRight();
         }
-        return rover.moveForward();
+        return rover;
     }
 }
