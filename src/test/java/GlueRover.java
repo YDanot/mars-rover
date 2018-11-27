@@ -23,7 +23,7 @@ public class GlueRover {
         return this;
     }
 
-    public GlueRover moveForward() {
+    public GlueRover forward() {
         this.rover = rover.moveForward();
         return this;
     }
@@ -47,7 +47,7 @@ public class GlueRover {
         return this;
     }
 
-    public GlueRover moveBackward() {
+    public GlueRover backward() {
         this.rover = rover.moveBackward();
         return this;
     }
@@ -61,12 +61,12 @@ public class GlueRover {
         return this;
     }
 
-    public GlueRover turnLeft() {
+    public GlueRover left() {
         this.rover = rover.turnLeft();
         return this;
     }
 
-    public GlueRover turnRight() {
+    public GlueRover right() {
         this.rover = rover.turnRight();
         return this;
     }
