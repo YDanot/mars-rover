@@ -3,7 +3,6 @@ package rover;
 import environment.Environment;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class Rover {
 
@@ -82,15 +81,15 @@ public class Rover {
     }
 
     private Position translationOf(int x, int y) {
-        return new Position((int) acceptX(position().x() + x), acceptY(position().y() + y));
+        return new Position(acceptX(position().x() + x), acceptY(position().y() + y));
     }
 
     private int acceptX(int x) {
-        return x;
+        return x > environment().width() ? 0 : x < 0 ? environment().width() : x;
     }
 
     private int acceptY(int y) {
-        return y;
+        return y > environment().height() ? 0 : y < 0 ? environment().height() : y;
     }
 
     @Override
