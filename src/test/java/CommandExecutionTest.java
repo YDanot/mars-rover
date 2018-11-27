@@ -33,9 +33,9 @@ public class CommandExecutionTest {
     @Test
     public void command_l() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("l").facingDirection())
+                a_rover().located_at(0, 0).facing("N").execute("l"))
                 .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").turnLeft().get().facingDirection()
+                        a_rover().located_at(0, 0).facing("N").turnLeft().get()
                 );
     }
 
