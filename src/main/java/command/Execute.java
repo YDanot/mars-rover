@@ -15,6 +15,9 @@ public class Execute {
         if (commands.equals("l")){
             return rover.turnLeft();
         }
+        if (commands.equals("r")){
+            return rover.turnRight();
+        }
         return rover.moveForward();
     }
 }
