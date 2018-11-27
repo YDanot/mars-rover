@@ -30,6 +30,15 @@ public class CommandExecutionTest {
                 );
     }
 
+    @Test
+    public void command_l() {
+        Assertions.assertThat(
+                a_rover().located_at(0, 0).facing("N").execute("l").position())
+                .isEqualTo(
+                        a_rover().located_at(0, 0).facing("N").turnLeft().get().position()
+                );
+    }
+
     private GlueRover a_rover() {
         return new GlueRover();
     }
