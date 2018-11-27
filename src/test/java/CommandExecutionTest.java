@@ -22,15 +22,6 @@ public class CommandExecutionTest {
     }
 
     @Test
-    public void command_fff() {
-        Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("fff").position())
-                .isEqualTo(
-                        a_rover().located_at(0, 0).facing("N").moveForward().moveForward().moveForward().get().position()
-                );
-    }
-
-    @Test
     public void command_b() {
         Assertions.assertThat(
                 a_rover().located_at(0, 0).facing("N").execute("b").position())
