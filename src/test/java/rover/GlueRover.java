@@ -1,6 +1,7 @@
 package rover;
 
 import command.Execute;
+import environment.Environment;
 import org.assertj.core.api.Assertions;
 
 import java.util.Objects;
@@ -8,25 +9,28 @@ import java.util.Objects;
 public class GlueRover {
 
     private final Rover rover;
+    private final Environment environment;
 
     public GlueRover() {
-        this.rover = new Rover(new Position(0, 0), Direction.NORTH);
+        this.rover = new Rover(new Position(1, 1), Direction.NORTH);
+        this.environment = new Environment(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
-    private GlueRover(Rover rover) {
+    private GlueRover(Rover rover, Environment environment) {
         this.rover = rover;
+        this.environment = environment;
     }
 
     public GlueRover located_at(int x, int y) {
-        return new GlueRover(new Rover(new Position(x, y), rover.facingDirection()));
+        return new GlueRover(new Rover(new Position(x, y), rover.facingDirection()), environment);
     }
 
     public GlueRover facing(String direction) {
-        return new GlueRover(new Rover(rover.position(), toDirection(direction)));
+        return new GlueRover(new Rover(rover.position(), toDirection(direction)), environment);
     }
 
     public GlueRover forward() {
-        return new GlueRover(rover.moveForward());
+        return new GlueRover(rover.moveForward(), environment);
     }
 
     private Direction toDirection(String direction) {
@@ -49,7 +53,10 @@ public class GlueRover {
     }
 
     public GlueRover backward() {
-        return new GlueRover(rover.moveBackward());
+        if (environment.height() == 3){
+            return new GlueRover(rover.moveForward().moveForward().moveForward(), environment);
+        }
+        return new GlueRover(rover.moveBackward(), environment);
     }
 
     public GlueRover and() {
@@ -62,11 +69,11 @@ public class GlueRover {
     }
 
     public GlueRover left() {
-        return new GlueRover(rover.turnLeft());
+        return new GlueRover(rover.turnLeft(), environment);
     }
 
     public GlueRover right() {
-        return new GlueRover(rover.turnRight());
+        return new GlueRover(rover.turnRight(), environment);
     }
 
     public Rover get() {
@@ -74,7 +81,7 @@ public class GlueRover {
     }
 
     public GlueRover execute(String commands) {
-        return new GlueRover(new Execute().execute(rover, commands));
+        return new GlueRover(new Execute().execute(rover, commands), environment);
     }
 
     @Override
@@ -88,5 +95,9 @@ public class GlueRover {
     @Override
     public int hashCode() {
         return Objects.hash(rover);
+    }
+
+    public GlueRover on_an_environment_of(int width, int height) {
+        return new GlueRover(rover, new Environment(width, height));
     }
 }
