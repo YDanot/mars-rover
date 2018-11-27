@@ -4,23 +4,28 @@ import rover.Rover;
 
 public class Execute {
 
-    public Rover execute(Rover rover, String commands){
-        if (commands.equals("ff")){
-            return rover.moveForward().moveForward();
+    public Rover execute(Rover rover, String commands) {
+        Rover afterMoving = rover;
+        for (String order : commands.split("")) {
+            afterMoving = executeOrder(afterMoving, order);
         }
+        return afterMoving;
+    }
 
-        if (commands.equals("f")){
+    private Rover executeOrder(Rover rover, String commands) {
+        if (commands.equals("f")) {
             return rover.moveForward();
         }
 
-        if (commands.equals("b")){
+        if (commands.equals("b")) {
             return rover.moveBackward();
         }
 
-        if (commands.equals("l")){
+        if (commands.equals("l")) {
             return rover.turnLeft();
         }
-        if (commands.equals("r")){
+
+        if (commands.equals("r")) {
             return rover.turnRight();
         }
         return rover;
