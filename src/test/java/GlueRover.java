@@ -1,3 +1,4 @@
+import command.Execute;
 import org.assertj.core.api.Assertions;
 import rover.Direction;
 import rover.Position;
@@ -23,7 +24,6 @@ public class GlueRover {
     }
 
     public GlueRover moveForward() {
-        final Rover rover = new Rover(position, toDirection(direction));
         this.rover = rover.moveForward();
         return this;
     }
@@ -48,7 +48,6 @@ public class GlueRover {
     }
 
     public GlueRover moveBackward() {
-        final Rover rover = new Rover(position, toDirection(direction));
         this.rover = rover.moveBackward();
         return this;
     }
@@ -63,18 +62,20 @@ public class GlueRover {
     }
 
     public GlueRover turnLeft() {
-        final Rover rover = new Rover(position, toDirection(direction));
         this.rover = rover.turnLeft();
         return this;
     }
 
     public GlueRover turnRight() {
-        final Rover rover = new Rover(position, toDirection(direction));
         this.rover = rover.turnRight();
         return this;
     }
 
     public Rover get() {
         return rover;
+    }
+
+    public Rover execute(String commands) {
+        return new Execute().execute(rover, commands);
     }
 }
