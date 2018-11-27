@@ -58,6 +58,15 @@ public class Rover {
     }
 
     public Rover turnRight() {
-        return this;
+        if (facingDirection().equals(Direction.EAST)) {
+            return new Rover(position(), Direction.SOUTH);
+        }
+        if (facingDirection().equals(Direction.SOUTH)) {
+            return new Rover(position(), Direction.WEST);
+        }
+        if (facingDirection().equals(Direction.WEST)) {
+            return new Rover(position(), Direction.NORTH);
+        }
+        return new Rover(position(), Direction.EAST);
     }
 }

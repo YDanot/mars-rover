@@ -76,6 +76,21 @@ public class MarsRoverTest {
         a_rover().located_at(0, 0).facing("N").turnRight().should_be_located_at(0, 0).and().should_face("E");
     }
 
+    @Test
+    public void facing_east_turn_right() {
+        a_rover().located_at(0, 0).facing("E").turnRight().should_be_located_at(0, 0).and().should_face("S");
+    }
+
+    @Test
+    public void facing_south_turn_right() {
+        a_rover().located_at(0, 0).facing("S").turnRight().should_be_located_at(0, 0).and().should_face("W");
+    }
+
+    @Test
+    public void facing_west_turn_right() {
+        a_rover().located_at(0, 0).facing("W").turnRight().should_be_located_at(0, 0).and().should_face("N");
+    }
+
     private GlueRover a_rover() {
         return new GlueRover();
     }
