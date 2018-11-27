@@ -30,6 +30,11 @@ public class MarsRoverTest {
         a_rover().located_at(-1, 0).facing("W").moveForward().should_be_located_at(-2, 0);
     }
 
+    @Test
+    public void facing_north_move_backward() {
+        a_rover().located_at(0, 0).facing("N").moveBackward().should_be_located_at(0, -1);
+    }
+
     private GlueRover a_rover() {
         return new GlueRover();
     }
@@ -73,6 +78,12 @@ public class MarsRoverTest {
 
         public void should_be_located_at(int x, int y) {
             Assertions.assertThat(rover.position()).isEqualTo(new Position(x, y));
+        }
+
+        public GlueRover moveBackward() {
+            final Rover rover = new Rover(position, toDirection(direction));
+            this.rover = rover.moveBackward();
+            return this;
         }
     }
 }

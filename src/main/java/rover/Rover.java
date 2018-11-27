@@ -30,4 +30,8 @@ public class Rover {
         }
         return new Rover(new Position(position().x(), position().y() + 1), facingDirection());
     }
+
+    public Rover moveBackward() {
+        return new Rover(new Position(position().x(), position().y() - 1), facingDirection());
+    }
 }
