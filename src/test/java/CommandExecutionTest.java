@@ -42,9 +42,9 @@ public class CommandExecutionTest {
     @Test
     public void command_r() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("r").facingDirection())
+                a_rover().located_at(0, 0).facing("N").execute("r"))
                 .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").turnRight().get().facingDirection()
+                        a_rover().located_at(0, 0).facing("N").turnRight().get()
                 );
     }
 
