@@ -6,27 +6,27 @@ public class CommandExecutionTest {
     @Test
     public void command_f() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("f").position())
-                .isEqualTo(
-                        a_rover().located_at(0, 0).facing("N").moveForward().get().position()
+                a_rover().located_at(0, 0).facing("N").execute("f"))
+                .isEqualToComparingFieldByField(
+                        a_rover().located_at(0, 0).facing("N").moveForward().get()
                 );
     }
 
     @Test
     public void command_ff() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("ff").position())
+                a_rover().located_at(0, 0).facing("N").execute("ff"))
                 .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").moveForward().moveForward().get().position()
+                        a_rover().located_at(0, 0).facing("N").moveForward().moveForward().get()
                 );
     }
 
     @Test
     public void command_b() {
         Assertions.assertThat(
-                a_rover().located_at(0, 0).facing("N").execute("b").position())
+                a_rover().located_at(0, 0).facing("N").execute("b"))
                 .isEqualToComparingFieldByField(
-                        a_rover().located_at(0, 0).facing("N").moveBackward().get().position()
+                        a_rover().located_at(0, 0).facing("N").moveBackward().get()
                 );
     }
 
