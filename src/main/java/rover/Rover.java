@@ -6,7 +6,6 @@ public class Rover {
     private final Direction facingDirection;
 
     public Rover(Position position, Direction facingDirection) {
-
         this.position = position;
         this.facingDirection = facingDirection;
     }
@@ -20,9 +19,9 @@ public class Rover {
     }
 
     public Rover moveForward() {
-        if (facingDirection.equals(Direction.SOUTH)){
-            return new Rover(new Position(position.x(), position.y() - 1), facingDirection);
+        if (facingDirection().equals(Direction.SOUTH)){
+            return new Rover(new Position(position().x(), position().y() - 1), facingDirection());
         }
-        return new Rover(new Position(position.x(), position.y() + 1), facingDirection);
+        return new Rover(new Position(position().x(), position().y() + 1), facingDirection());
     }
 }
