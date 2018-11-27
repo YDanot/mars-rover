@@ -56,4 +56,8 @@ public class Rover {
         }
         return new Rover(position(), Direction.WEST);
     }
+
+    public Rover turnRight() {
+        return this;
+    }
 }
