@@ -45,6 +45,9 @@ public class Rover {
     }
 
     public Rover turnLeft() {
+        if (facingDirection().equals(Direction.EAST)) {
+            return new Rover(position(), Direction.NORTH);
+        }
         if (facingDirection().equals(Direction.SOUTH)) {
             return new Rover(position(), Direction.EAST);
         }
