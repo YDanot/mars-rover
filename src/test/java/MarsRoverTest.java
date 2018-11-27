@@ -13,19 +13,19 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void first_forward_south_move() {
+    public void facing_south_move_forward() {
         a_rover().located_at(0, 0).facing("S").moveForward().should_be_located_at(0, -1);
         a_rover().located_at(0, -1).facing("S").moveForward().should_be_located_at(0, -2);
     }
 
     @Test
-    public void first_forward_east_move() {
+    public void facing_east_move_forward() {
         a_rover().located_at(0, 0).facing("E").moveForward().should_be_located_at(1, 0);
         a_rover().located_at(1, 0).facing("E").moveForward().should_be_located_at(2, 0);
     }
 
     @Test
-    public void first_forward_west_move() {
+    public void facing_west_move_forward() {
         a_rover().located_at(0, 0).facing("W").moveForward().should_be_located_at(-1, 0);
         a_rover().located_at(-1, 0).facing("W").moveForward().should_be_located_at(-2, 0);
     }
