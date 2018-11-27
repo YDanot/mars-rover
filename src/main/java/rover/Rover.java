@@ -33,14 +33,14 @@ public class Rover {
 
     public Rover moveBackward() {
         if (facingDirection().equals(Direction.WEST)) {
-            return new Rover(new Position(position().x() + 1, position().y()), facingDirection());
+            return new Rover(position().translationOf(1,0), facingDirection());
         }
         if (facingDirection().equals(Direction.EAST)) {
-            return new Rover(new Position(position().x() - 1, position().y()), facingDirection());
+            return new Rover(position().translationOf(-1,0), facingDirection());
         }
         if (facingDirection().equals(Direction.SOUTH)) {
-            return new Rover(new Position(position().x(), position().y() + 1), facingDirection());
+            return new Rover(position().translationOf(0,1), facingDirection());
         }
-        return new Rover(new Position(position().x(), position().y() - 1), facingDirection());
+        return new Rover(position().translationOf(0,-1), facingDirection());
     }
 }
