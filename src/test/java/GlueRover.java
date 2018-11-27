@@ -6,20 +6,15 @@ import rover.Rover;
 
 public class GlueRover {
 
-    private Position position;
-    private String direction;
-
-    private Rover rover;
+    private Rover rover = new Rover(new Position(0,0), Direction.NORTH);
 
     public GlueRover located_at(int x, int y) {
-        this.position = new Position(x, y);
-        this.rover = new Rover(position, toDirection(direction));
+        this.rover = new Rover(new Position(x, y), rover.facingDirection());
         return this;
     }
 
     public GlueRover facing(String direction) {
-        this.direction = direction;
-        this.rover = new Rover(position, toDirection(direction));
+        this.rover = new Rover(rover.position(), toDirection(direction));
         return this;
     }
 
