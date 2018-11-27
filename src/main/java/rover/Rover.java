@@ -43,4 +43,8 @@ public class Rover {
         }
         return new Rover(position().translationOf(0,-1), facingDirection());
     }
+
+    public Rover turnLeft() {
+        return new Rover(position(), Direction.WEST);
+    }
 }
