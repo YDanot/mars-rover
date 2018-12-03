@@ -9,13 +9,16 @@ public class Environment {
     private final int height;
 
     public Environment(int width, int height) {
-
         this.width = width;
         this.height = height;
     }
 
-    public Position move(Position start, Direction direction){
-        return new Position(acceptX(start.x() + direction.translationX()), acceptY(start.y() + direction.translationY()));
+    public Position move(Position start, Direction direction) {
+        return accept(start.translate(direction.translationX(), direction.translationY()));
+    }
+
+    private Position accept(Position p) {
+        return new Position(acceptX(p.x()), acceptY(p.y()));
     }
 
     private int acceptX(int x) {

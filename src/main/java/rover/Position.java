@@ -41,4 +41,8 @@ public class Position {
                 ", y=" + y +
                 '}';
     }
+
+    public Position translate(int x, int y) {
+        return new Position(x() + x, y() + y);
+    }
 }

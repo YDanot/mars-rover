@@ -28,7 +28,7 @@ public class CommandExecutionTest {
     @Test
     public void command_b() {
         Assertions.assertThat(
-                a_rover().execute("b"))
+                        a_rover().execute("b"))
                 .isEqualTo(
                         a_rover().backward()
                 );
@@ -37,7 +37,7 @@ public class CommandExecutionTest {
     @Test
     public void command_l() {
         Assertions.assertThat(
-                a_rover().execute("l"))
+                        a_rover().execute("l"))
                 .isEqualTo(
                         a_rover().left()
                 );
@@ -46,7 +46,7 @@ public class CommandExecutionTest {
     @Test
     public void command_r() {
         Assertions.assertThat(
-                a_rover().execute("r"))
+                        a_rover().execute("r"))
                 .isEqualTo(
                         a_rover().right()
                 );
@@ -55,7 +55,7 @@ public class CommandExecutionTest {
     @Test
     public void command_frbl() {
         Assertions.assertThat(
-                a_rover().execute("frbl"))
+                            a_rover().execute("frbl"))
                 .isEqualTo(
                         a_rover().forward().right().backward().left()
                 );
