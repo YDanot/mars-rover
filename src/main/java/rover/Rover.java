@@ -1,6 +1,7 @@
 package rover;
 
 import environment.Environment;
+import utils.Either;
 
 import java.util.Objects;
 
@@ -9,9 +10,18 @@ public class Rover {
     private final Position position;
     private final Direction facingDirection;
 
+    private final Position reportedObstacle;
+
     public Rover(Position position, Direction facingDirection) {
         this.position = position;
         this.facingDirection = facingDirection;
+        this.reportedObstacle = null;
+    }
+
+    private Rover(Position position, Direction facingDirection, Position reportedObstacle) {
+        this.position = position;
+        this.facingDirection = facingDirection;
+        this.reportedObstacle = reportedObstacle;
     }
 
     public Position position() {
@@ -22,12 +32,23 @@ public class Rover {
         return facingDirection;
     }
 
-    public Rover moveForward(Environment environment) {
-        return new Rover(environment.move(position, facingDirection()), facingDirection());
+    public Either<Rover, Position> moveForward(Environment environment) {
+        return move(facingDirection(), environment);
     }
 
-    public Rover moveBackward(Environment environment) {
-        return new Rover(environment.move(position, facingDirection().opposite()), facingDirection());
+    private Either<Rover, Position> move(Direction direction, Environment environment) {
+        final Either<Position, Position> move = environment.move(position, direction);
+
+        final Rover moved = new Rover(move.option1(), facingDirection());
+        Position obstacle = null;
+        if (move.isOption2()) {
+            obstacle = move.option2();
+        }
+        return Either.<Rover, Position>either(moved).or(obstacle);
+    }
+
+    public Either<Rover, Position> moveBackward(Environment environment) {
+        return move(facingDirection().opposite(), environment);
     }
 
     public Rover turnLeft() {
