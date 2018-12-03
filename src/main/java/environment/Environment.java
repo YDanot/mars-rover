@@ -6,12 +6,14 @@ import utils.Either;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Environment {
 
     private final int width;
     private final int height;
-    private final List<Position> obstacles;
+    private final List<Obstacle> obstacles;
 
     public Environment(int width, int height) {
         this.width = width;
@@ -19,16 +21,17 @@ public class Environment {
         obstacles = new ArrayList<>();
     }
 
-    private Environment(int width, int height, List<Position> obstacles) {
+    private Environment(int width, int height, List<Obstacle> obstacles) {
         this.width = width;
         this.height = height;
         this.obstacles = obstacles;
     }
 
-    public Either<Position, Position> move(Position start, Direction direction) {
+    public Either<Position, Obstacle> move(Position start, Direction direction) {
         final Position translate = accept(start.translate(direction));
-        final Position obstacle = obstacles.contains(translate) ? translate : null;
-        return Either.<Position, Position> either(translate).or(obstacle);
+        final Optional<Obstacle> obstacle = obstacles.stream().filter(o -> o.position().equals(translate)).findFirst();
+
+        return Either.<Position, Obstacle>either(translate).or(obstacle.orElse(null));
     }
 
     private Position accept(Position p) {
@@ -44,8 +47,23 @@ public class Environment {
     }
 
     public Environment addObstacleOn(Position position) {
-        List<Position> obstacles = this.obstacles;
-        obstacles.add(position);
+        List<Obstacle> obstacles = this.obstacles;
+        obstacles.add(Obstacle.at(position));
         return new Environment(width, height, obstacles);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Environment)) return false;
+        Environment that = (Environment) o;
+        return width == that.width &&
+                height == that.height &&
+                Objects.equals(obstacles, that.obstacles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height, obstacles);
     }
 }

@@ -1,6 +1,7 @@
 package command;
 
 import environment.Environment;
+import environment.Obstacle;
 import rover.Position;
 import rover.Rover;
 import utils.Either;
@@ -14,10 +15,10 @@ import java.util.stream.Collectors;
 
 public class Commands {
 
-    private static final Map<String, BiFunction<Rover, Environment, Either<Rover, Position>>> commandMapping = classic();
+    private static final Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> commandMapping = classic();
 
-    private static Map<String, BiFunction<Rover, Environment, Either<Rover, Position>>> classic() {
-        Map<String, BiFunction<Rover, Environment, Either<Rover, Position>>> rules = new HashMap<>();
+    private static Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> classic() {
+        Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> rules = new HashMap<>();
         rules.put("f", Rover::moveForward);
         rules.put("b", Rover::moveBackward);
         rules.put("l", (rover, environment) -> Either.either(rover.turnLeft()));
@@ -31,12 +32,17 @@ public class Commands {
         this.commands = Arrays.stream(commandLine.split("")).collect(Collectors.toList());
     }
 
-    public Rover execute(Rover rover, Environment environment) {
-        Rover afterMoving = rover;
+    public Either<Rover, Obstacle> execute(Rover rover, Environment environment) {
+        Either<Rover, Obstacle> moved = Either.either(rover);
         for (String c : commands) {
-            afterMoving = commandMapping.get(c).apply(afterMoving, environment).option1();
+            if (moved.isOption1()) {
+                moved = commandMapping.get(c).apply(moved.option1(), environment);
+            }
+            if (moved.isOption2()) {
+                break;
+            }
         }
-        return afterMoving;
+        return moved;
     }
 
 }
