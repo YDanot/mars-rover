@@ -1,6 +1,6 @@
 package rover;
 
-import command.Execute;
+import command.Commands;
 import environment.Environment;
 import org.assertj.core.api.Assertions;
 
@@ -78,7 +78,8 @@ public class GlueRover {
     }
 
     public GlueRover execute(String commands) {
-        return new GlueRover(new Execute().execute(rover, commands, environment), environment);
+
+        return new GlueRover(new Commands(commands).execute(rover, environment), environment);
     }
 
     @Override

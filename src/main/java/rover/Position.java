@@ -20,6 +20,10 @@ public class Position {
         return y;
     }
 
+    public Position translate(Direction direction) {
+        return new Position(x() + direction.translationX(), y() + direction.translationY());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,9 +44,5 @@ public class Position {
                 "x=" + x +
                 ", y=" + y +
                 '}';
-    }
-
-    public Position translate(int x, int y) {
-        return new Position(x() + x, y() + y);
     }
 }

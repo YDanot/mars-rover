@@ -14,7 +14,7 @@ public class Environment {
     }
 
     public Position move(Position start, Direction direction) {
-        return accept(start.translate(direction.translationX(), direction.translationY()));
+        return accept(start.translate(direction));
     }
 
     private Position accept(Position p) {
