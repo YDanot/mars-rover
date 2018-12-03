@@ -4,8 +4,13 @@ public enum Direction {
 
     NORTH() {
         @Override
-        public Translation translation() {
-            return new Translation(0,1);
+        public int translationX() {
+            return 0;
+        }
+
+        @Override
+        public int translationY() {
+            return 1;
         }
 
         @Override
@@ -21,8 +26,13 @@ public enum Direction {
     },
     SOUTH() {
         @Override
-        public Translation translation() {
-            return new Translation(0,-1);
+        public int translationX() {
+            return 0;
+        }
+
+        @Override
+        public int translationY() {
+            return -1;
         }
 
         @Override
@@ -38,8 +48,13 @@ public enum Direction {
     },
     EAST() {
         @Override
-        public Translation translation() {
-            return new Translation(1,0);
+        public int translationX() {
+            return 1;
+        }
+
+        @Override
+        public int translationY() {
+            return 0;
         }
 
         @Override
@@ -55,8 +70,13 @@ public enum Direction {
     },
     WEST() {
         @Override
-        public Translation translation() {
-            return new Translation(-1,0);
+        public int translationX() {
+            return -1;
+        }
+
+        @Override
+        public int translationY() {
+            return 0;
         }
 
         @Override
@@ -71,7 +91,8 @@ public enum Direction {
 
     };
 
-    public abstract Translation translation();
+    public abstract int translationX();
+    public abstract int translationY();
     public abstract Direction opposite();
     public abstract Direction left();
 

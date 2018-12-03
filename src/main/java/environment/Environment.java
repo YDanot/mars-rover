@@ -1,5 +1,8 @@
 package environment;
 
+import rover.Direction;
+import rover.Position;
+
 public class Environment {
 
     private final int width;
@@ -11,11 +14,23 @@ public class Environment {
         this.height = height;
     }
 
-    public int width() {
+    private int width() {
         return width;
     }
 
-    public int height() {
+    private int height() {
         return height;
+    }
+
+    public Position move(Position start, Direction direction){
+        return new Position(acceptX(start.x() + direction.translationX()), acceptY(start.y() + direction.translationY()));
+    }
+
+    private int acceptX(int x) {
+        return x > width() ? 0 : x < 0 ? width() : x;
+    }
+
+    private int acceptY(int y) {
+        return y > height() ? 0 : y < 0 ? height() : y;
     }
 }

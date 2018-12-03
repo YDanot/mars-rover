@@ -23,11 +23,11 @@ public class Rover {
     }
 
     public Rover moveForward(Environment environment) {
-        return new Rover(facingDirection().translation().apply(position(), environment), facingDirection());
+        return new Rover(environment.move(position, facingDirection()), facingDirection());
     }
 
     public Rover moveBackward(Environment environment) {
-        return new Rover(facingDirection().opposite().translation().apply(position(), environment), facingDirection());
+        return new Rover(environment.move(position, facingDirection().opposite()), facingDirection());
     }
 
     public Rover turnLeft() {
