@@ -19,9 +19,9 @@ public class CommandExecutionTest {
     public void command_ff() {
 
         Assertions.assertThat(
-                        a_rover().execute("ff").get())
-                .isEqualToComparingFieldByField(
-                        a_rover().forward().forward().get()
+                        a_rover().execute("ff"))
+                .isEqualTo(
+                        a_rover().forward().forward()
                 );
     }
 

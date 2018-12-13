@@ -2,54 +2,36 @@ package environment;
 
 import rover.Direction;
 import rover.Position;
-import utils.Either;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Environment {
 
-    private final int width;
-    private final int height;
-    private final List<Obstacle> obstacles;
+    private final Map environment;
+    private final Obstacles obstacles;
 
     public Environment(int width, int height) {
-        this.width = width;
-        this.height = height;
-        obstacles = new ArrayList<>();
+        environment = new Map(width, height);
+        obstacles = new Obstacles();
     }
 
-    private Environment(int width, int height, List<Obstacle> obstacles) {
-        this.width = width;
-        this.height = height;
+    private Environment(Map environment, Obstacles obstacles) {
         this.obstacles = obstacles;
+        this.environment = environment;
     }
 
-    public Either<Position, Obstacle> move(Position start, Direction direction) {
-        final Position translate = accept(start.translate(direction));
-        final Optional<Obstacle> obstacle = obstacles.stream().filter(o -> o.position().equals(translate)).findFirst();
+    public Move move(Position start, Direction direction) {
+        final Position translate = environment.accept(start.translate(direction));
 
-        return Either.<Position, Obstacle>either(translate).or(obstacle.orElse(null));
-    }
+        if (obstacles.on(translate)) {
+            return new Move(start, true);
+        }
+        return new Move(translate, false);
 
-    private Position accept(Position p) {
-        return new Position(acceptX(p.x()), acceptY(p.y()));
-    }
-
-    private int acceptX(int x) {
-        return x > width ? 0 : x < 0 ? width : x;
-    }
-
-    private int acceptY(int y) {
-        return y > height ? 0 : y < 0 ? height : y;
     }
 
     public Environment addObstacleOn(Position position) {
-        List<Obstacle> obstacles = this.obstacles;
-        obstacles.add(Obstacle.at(position));
-        return new Environment(width, height, obstacles);
+        return new Environment(environment, obstacles.putObstacleOn(position));
     }
 
     @Override
@@ -57,13 +39,12 @@ public class Environment {
         if (this == o) return true;
         if (!(o instanceof Environment)) return false;
         Environment that = (Environment) o;
-        return width == that.width &&
-                height == that.height &&
+        return Objects.equals(environment, that.environment) &&
                 Objects.equals(obstacles, that.obstacles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(width, height, obstacles);
+        return Objects.hash(obstacles, environment);
     }
 }

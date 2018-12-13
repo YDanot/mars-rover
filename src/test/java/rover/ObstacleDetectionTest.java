@@ -13,7 +13,7 @@ public class ObstacleDetectionTest {
                 .forward()
                 .should_be_located_at(1, 1)
                 .and()
-                .should_report_obstacle_in(1,2);
+                .should_report_obstacle();
     }
 
     @Test
@@ -25,7 +25,7 @@ public class ObstacleDetectionTest {
                 .backward()
                 .should_be_located_at(1, 1)
                 .and()
-                .should_report_obstacle_in(1,0);
+                .should_report_obstacle();
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ObstacleDetectionTest {
                 .execute("bfff")
                 .should_be_located_at(1, 1)
                 .and()
-                .should_report_obstacle_in(1,0);
+                .should_report_obstacle();
     }
     private GlueRover a_rover() {
         return new GlueRover();

@@ -1,48 +1,43 @@
 package command;
 
 import environment.Environment;
-import environment.Obstacle;
-import rover.Position;
+import rover.Moved;
 import rover.Rover;
-import utils.Either;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.Queue;
+
+import static java.util.stream.Collectors.toList;
 
 public class Commands {
 
-    private static final Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> commandMapping = classic();
+    private final Queue<Command> commands;
+    private final Environment environment;
 
-    private static Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> classic() {
-        Map<String, BiFunction<Rover, Environment, Either<Rover, Obstacle>>> rules = new HashMap<>();
-        rules.put("f", Rover::moveForward);
-        rules.put("b", Rover::moveBackward);
-        rules.put("l", (rover, environment) -> Either.either(rover.turnLeft()));
-        rules.put("r", (rover, environment) -> Either.either(rover.turnRight()));
-        return rules;
+    public Commands(String commandLine, Environment environment) {
+        this.environment = environment;
+        this.commands = new ArrayDeque<>();
+        commands.addAll(
+                Arrays.stream(commandLine.split("")).map(Command::get).collect(toList())
+        );
     }
 
-    private final List<String> commands;
-
-    public Commands(String commandLine) {
-        this.commands = Arrays.stream(commandLine.split("")).collect(Collectors.toList());
+    public Moved executeOn(Rover rover) {
+        return executeOn(executeNextCommandOn(rover));
     }
 
-    public Either<Rover, Obstacle> execute(Rover rover, Environment environment) {
-        Either<Rover, Obstacle> moved = Either.either(rover);
-        for (String c : commands) {
-            if (moved.isOption1()) {
-                moved = commandMapping.get(c).apply(moved.option1(), environment);
-            }
-            if (moved.isOption2()) {
-                break;
-            }
+    private Moved executeNextCommandOn(Rover rover) {
+        return Objects.requireNonNull(commands.poll()).execute(rover, environment);
+    }
+
+    private Moved executeOn(Moved moved) {
+        if (moved.obstacle() || commands.isEmpty()) {
+            return moved;
         }
-        return moved;
+
+        return executeOn(executeNextCommandOn(moved.rover()));
     }
 
 }
