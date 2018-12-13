@@ -23,7 +23,7 @@ public class Environment {
     public Move move(Position start, Direction direction) {
         final Position translate = environment.accept(start.translate(direction));
 
-        if (obstacles.on(translate)) {
+        if (obstacles.at(translate)) {
             return new Move(start, true);
         }
         return new Move(translate, false);

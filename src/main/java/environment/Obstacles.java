@@ -18,7 +18,7 @@ public class Obstacles {
         this.obstacles = new ArrayList<>();
     }
 
-    public boolean on(Position position){
+    public boolean at(Position position){
         return obstacles.stream().anyMatch(o -> o.position().equals(position));
     }
 
