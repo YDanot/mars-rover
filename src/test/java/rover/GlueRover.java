@@ -1,7 +1,7 @@
 package rover;
 
 import command.Commands;
-import environment.Environment;
+import environment.Planet;
 import org.assertj.core.api.Assertions;
 
 import java.util.Objects;
@@ -9,22 +9,22 @@ import java.util.Objects;
 public class GlueRover {
 
     private final Rover rover;
-    private final Environment environment;
+    private final Planet environment;
     private final boolean obstacle;
 
-    public GlueRover() {
+    private GlueRover() {
         this.rover = new Rover(new Position(1, 1), Direction.NORTH);
-        this.environment = new Environment(5, 5);
+        this.environment = new Planet(5, 5);
         obstacle = false;
     }
 
-    private GlueRover(Rover rover, Environment environment) {
+    private GlueRover(Rover rover, Planet environment) {
         this.rover = rover;
         this.environment = environment;
         obstacle = false;
     }
 
-    private GlueRover(Rover rover, Environment environment, boolean obstacle) {
+    private GlueRover(Rover rover, Planet environment, boolean obstacle) {
         this.rover = rover;
         this.environment = environment;
         this.obstacle = obstacle;
@@ -40,7 +40,7 @@ public class GlueRover {
 
     public GlueRover forward() {
 
-        final Moved moved = rover.moveForward(environment);
+        final MovedRover moved = rover.moveForward(environment);
 
         return new GlueRover(moved.rover(), environment, moved.obstacle());
     }
@@ -65,7 +65,7 @@ public class GlueRover {
     }
 
     public GlueRover backward() {
-        final Moved moved = rover.moveBackward(environment);
+        final MovedRover moved = rover.moveBackward(environment);
         return new GlueRover(moved.rover(), environment, moved.obstacle());
     }
 
@@ -88,7 +88,7 @@ public class GlueRover {
     }
 
     public GlueRover execute(String commands) {
-        final Moved moved = new Commands(commands, environment).executeOn(rover);
+        final MovedRover moved = new Commands(commands, environment).executeOn(rover);
         return new GlueRover(moved.rover(), environment, moved.obstacle());
     }
 
@@ -112,11 +112,11 @@ public class GlueRover {
     }
 
     public GlueRover on_an_environment_of(int width, int height) {
-        return new GlueRover(new Rover(rover.position(), rover.facingDirection()), new Environment(width, height));
+        return new GlueRover(new Rover(rover.position(), rover.facingDirection()), new Planet(width, height));
     }
 
     public GlueRover with_obstacle_on(int x, int y) {
-        return new GlueRover(rover, environment.addObstacleOn(new Position(x, y)));
+        return new GlueRover(rover, environment.putObstacleAt(new Position(x, y)));
     }
 
     public GlueRover should_report_obstacle() {
@@ -124,7 +124,7 @@ public class GlueRover {
         return this;
     }
 
-    public Rover get() {
-        return rover;
+    public static GlueRover a_rover() {
+        return new GlueRover();
     }
 }

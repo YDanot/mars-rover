@@ -22,7 +22,7 @@ public class Obstacles {
         return obstacles.stream().anyMatch(o -> o.position().equals(position));
     }
 
-    public Obstacles putObstacleOn(Position position) {
+    public Obstacles putObstacleAt(Position position) {
         List<Obstacle> obstacles = this.obstacles;
         obstacles.add(Obstacle.at(position));
         return new Obstacles(obstacles);

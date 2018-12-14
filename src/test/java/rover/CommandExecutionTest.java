@@ -3,6 +3,8 @@ package rover;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import static rover.GlueRover.a_rover;
+
 public class CommandExecutionTest {
 
     @Test
@@ -61,7 +63,4 @@ public class CommandExecutionTest {
                 );
     }
 
-    private GlueRover a_rover() {
-        return new GlueRover();
-    }
 }

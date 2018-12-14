@@ -1,11 +1,11 @@
 package rover;
 
-public class Moved {
+public class MovedRover {
 
     private final Rover rover;
     private final boolean obstacle;
 
-    public Moved(Rover rover, boolean obstacle) {
+    public MovedRover(Rover rover, boolean obstacle) {
         this.rover = rover;
         this.obstacle = obstacle;
     }

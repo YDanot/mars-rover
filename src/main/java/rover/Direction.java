@@ -2,7 +2,7 @@ package rover;
 
 public enum Direction {
 
-    NORTH() {
+    NORTH {
         @Override
         public int translationX() {
             return 0;
@@ -24,7 +24,7 @@ public enum Direction {
         }
 
     },
-    SOUTH() {
+    SOUTH {
         @Override
         public int translationX() {
             return 0;
@@ -46,7 +46,7 @@ public enum Direction {
         }
 
     },
-    EAST() {
+    EAST {
         @Override
         public int translationX() {
             return 1;
@@ -68,7 +68,7 @@ public enum Direction {
         }
 
     },
-    WEST() {
+    WEST {
         @Override
         public int translationX() {
             return -1;

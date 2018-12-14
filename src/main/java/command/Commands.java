@@ -1,7 +1,7 @@
 package command;
 
-import environment.Environment;
-import rover.Moved;
+import environment.Planet;
+import rover.MovedRover;
 import rover.Rover;
 
 import java.util.ArrayDeque;
@@ -14,9 +14,9 @@ import static java.util.stream.Collectors.toList;
 public class Commands {
 
     private final Queue<Command> commands;
-    private final Environment environment;
+    private final Planet environment;
 
-    public Commands(String commandLine, Environment environment) {
+    public Commands(String commandLine, Planet environment) {
         this.environment = environment;
         this.commands = new ArrayDeque<>();
         commands.addAll(
@@ -24,15 +24,15 @@ public class Commands {
         );
     }
 
-    public Moved executeOn(Rover rover) {
+    public MovedRover executeOn(Rover rover) {
         return executeOn(executeNextCommandOn(rover));
     }
 
-    private Moved executeNextCommandOn(Rover rover) {
+    private MovedRover executeNextCommandOn(Rover rover) {
         return Objects.requireNonNull(commands.poll()).execute(rover, environment);
     }
 
-    private Moved executeOn(Moved moved) {
+    private MovedRover executeOn(MovedRover moved) {
         if (moved.obstacle() || commands.isEmpty()) {
             return moved;
         }

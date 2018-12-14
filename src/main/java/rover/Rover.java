@@ -1,6 +1,6 @@
 package rover;
 
-import environment.Environment;
+import environment.Planet;
 import environment.Move;
 
 import java.util.Objects;
@@ -23,18 +23,18 @@ public class Rover {
         return facingDirection;
     }
 
-    public Moved moveForward(Environment environment) {
+    public MovedRover moveForward(Planet environment) {
         return move(facingDirection(), environment);
     }
 
-    private Moved move(Direction direction, Environment environment) {
+    private MovedRover move(Direction direction, Planet environment) {
         final Move move = environment.move(position, direction);
 
-        return new Moved(new Rover(move.position(), facingDirection()), move.obstacle());
+        return new MovedRover(new Rover(move.position(), facingDirection()), move.obstacle());
 
     }
 
-    public Moved moveBackward(Environment environment) {
+    public MovedRover moveBackward(Planet environment) {
         return move(facingDirection().opposite(), environment);
     }
 

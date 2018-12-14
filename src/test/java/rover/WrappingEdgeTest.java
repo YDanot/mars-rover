@@ -2,6 +2,8 @@ package rover;
 
 import org.junit.Test;
 
+import static rover.GlueRover.a_rover;
+
 public class WrappingEdgeTest {
 
     @Test
@@ -16,7 +18,4 @@ public class WrappingEdgeTest {
                 .should_face("N");
     }
 
-    private GlueRover a_rover() {
-        return new GlueRover();
-    }
 }

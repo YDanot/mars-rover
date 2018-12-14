@@ -20,7 +20,7 @@ public class Position {
         return y;
     }
 
-    public Position translate(Direction direction) {
+    public Position toward(Direction direction) {
         return new Position(x() + direction.translationX(), y() + direction.translationY());
     }
 

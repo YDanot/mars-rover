@@ -2,6 +2,8 @@ package rover;
 
 import org.junit.Test;
 
+import static rover.GlueRover.a_rover;
+
 public class ObstacleDetectionTest {
 
     @Test
@@ -38,8 +40,5 @@ public class ObstacleDetectionTest {
                 .should_be_located_at(1, 1)
                 .and()
                 .should_report_obstacle();
-    }
-    private GlueRover a_rover() {
-        return new GlueRover();
     }
 }

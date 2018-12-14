@@ -2,6 +2,8 @@ package rover;
 
 import org.junit.Test;
 
+import static rover.GlueRover.a_rover;
+
 public class MarsRoverTest {
 
     @Test
@@ -41,7 +43,7 @@ public class MarsRoverTest {
 
     @Test
     public void facing_east_move_backward() {
-        a_rover().located_at(1, 0).facing("E").backward().should_be_located_at(0, 0).and().should_face("E");;
+        a_rover().located_at(1, 0).facing("E").backward().should_be_located_at(0, 0).and().should_face("E");
     }
 
     @Test
@@ -87,10 +89,6 @@ public class MarsRoverTest {
     @Test
     public void facing_west_turn_right() {
         a_rover().located_at(0, 0).facing("W").right().should_be_located_at(0, 0).and().should_face("N");
-    }
-
-    private GlueRover a_rover() {
-        return new GlueRover();
     }
 
 }
